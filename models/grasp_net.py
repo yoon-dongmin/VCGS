@@ -121,6 +121,11 @@ class GraspNetModel:
             else:
                 raise NameError("There is no architecture name. Please check validate in GraspNetModel")
 
+    def inference(self, pcd): 
+        with torch.no_grad():
+            if self.opt.arch == "sampler":
+                self.net.module.generate_grasps(pcd, z=z)
+
 
     def optimize_parameters(self):
         self.optimizer.zero_grad()
